@@ -1,0 +1,34 @@
+\section{Related Work}
+\label{sec.related_work}
+
+
+\par
+Many previous ideas and systems have helped and inspired us. We categorize and discuss closely related work below.
+
+
+
+\subsection{Virtualization}
+
+\par
+Programming language virtualization, such as Java, Silverlight, JavaScript and Flash are commonly used sandboxes that have achieved widespread adoption. These sandboxes combine untrusted application code with an interpreter and standard libraries. Standard libraries consolidate routines to perform I/O, network communication, and other system sensitive functionality. Though many sandboxes implement the bulk of their standard libraries in a memory-safe language like Java or C\#, flaws in memory-safe code can still pose a threat.
+
+\par
+Virtualization is widely used to isolate untrusted applications that share the same hardware. There is bare metal hardware virtualization, such as VMware ESX Server, XEN \cite{Xen:03}, and MS Hyper-V. There is also hosted hardware virtualization, such as VMware Workstation, VMware Server, MS Virtual PC and Server. However, there are limitations with virtualization. Virtualization hypervisor suffers from attack vectors including architectural vulnerability, software vulnerability, and configuration risk. For example, small code footprint of hypervisor could become a potential vulnerability and lead to serious problem.
+
+\par
+Drawbridge \cite{Drawbridge:11} uses light-weight processes and a library OS to present a Windows persona to a wide variety of Windows applications. This is accomplished by moving a large portion of the OS into the process, and presenting a simplified system virtual machine like interface to each process. This approach brings many of the benefits of VM based temporal, spatial and fault isolation properties to a per-process level.
+
+
+\subsection{System Call Interposition}
+
+\par
+System call interposition offers a number of properties that make it attractive for building sandboxes, though it can be error prone \cite{SCI:04}. Approaches for delegation and filtering have been extensively studied, along with their respective tradeoffs with security and performance. Janus Version 2 (J2) \cite{Janus0:96, Janus:99} uses filtering and sandboxing, while Ostia \cite{SCI:04} uses a delegation.
+
+\par
+Ostia also provides a hybrid interposition architecture, which allows for kernel level enforcement and user policies. The Kernel module enforces policy, denies direct access to restricted resources, and delegates certain calls to the Emulation library, which sends transformed system calls to the Agents. The Agent reads the policy file and handles the delegation of calls.
+
+
+\subsection{Software Fault Isolation}
+
+\par
+Software Fault Isolation (SFI) is a sandboxing technique in which native instructions are executed, but only those instructions which can be executed without violating the sandbox's constraints are allowed \cite{SFI:93}. Instructions usually excludes are those which could jump outside the program's predefined memory region or execute a system call. Programs must use a specific compiler which enforces these constraints, then the programs are validated on load. Nooks \cite{Nooks:03} isolates Linux kernel modules, so that when they crash the whole kernel does not crash as well. They use two techniques: sandboxing and micro-reboots. Nooks uses both as SFI-based and user-level sandbox. Micros-reboots conceptually refresh small parts of the system.

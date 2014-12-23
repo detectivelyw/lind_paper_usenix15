@@ -1,0 +1,36 @@
+\section{Background}
+\label{sec.background}
+
+
+\par
+In this section, we first discuss our threat model. We then give necessary description about the two sandboxing techniques that our work depends on. One is Google's Native Client sandbox, the other is Seattle's Repy sandbox. 
+
+
+\subsection{Threat Model}
+
+\par
+In our threat model, threats refer to any behavior that may cause potential harm to the system, which may be triggered by malicious code or bugs in non-malicious programs.
+
+\par
+In order to fully execute their functions, applications need to have access to a set of privileges provided by the operating system, usually exposed as system calls. The primary security goal of a sandbox is to restrict a program to some subset of privileges, usually by exposing a set of functions that mediate access to the underlying operating system privileges. Threats occur when applications obtain access to privileges that were not intentionally exposed by the sandbox, thus escaping the sandbox \cite{Repy:10}.
+
+\par
+To pose threats to a sandbox, we assume that applications may use multiple threads to modify visible state or issue concurrent requests which may trigger a race condition. Our goal is to prevent bugs in the code from allowing an user program to escape the sandbox.
+
+
+\subsection{Google's Native Client Sandbox}
+
+\par
+Google's Native Client (NaCl) is a sandbox for untrusted x86 native code \cite{NaCl:09}. NaCl aims to give applications the computational performance of native applications without compromising safety. NaCl uses software fault isolation and a secure runtime to direct system interaction and side effects through interfaces managed by NaCl. NaCl provides operating system portability for binary code while supporting performance-oriented features, such as thread support, instruction set extensions such as SSE, and use of compiler intrinsics and hand-coded assembler. 
+
+\par
+We leverage NaCl execution environment. NaCl allows the efficient execution of legacy code in the form of x86 and ARM binaries that are built with a lightly modified compiler tool chain.
+
+
+\subsection{Seattle's Repy Sandbox}
+
+\par
+Seattle's Repy is a restricted subset of Python \cite{Repy:10}, which is a sandbox that provides safe environment for running applications.
+
+\par
+In Lind, we use Repy to safely re-implement a subset of the POSIX API, which provides fundamental operating system access to many applications. The POSIX API, which itself is difficult to secure, is constructed using the Seattle's Repy sandbox which provides performance isolation and safety. 
