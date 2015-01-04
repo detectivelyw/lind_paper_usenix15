@@ -1,0 +1,55 @@
+\section{Introduction}
+\label{sec.introduction}
+
+[Title: Quantifying and Minimizing the Risk of Privilege Escalation Attacks.]
+
+Despite substantial effort, modern systems are vulnerable to privilege 
+escalation attacks.  [ Mention zero-days, impact, etc. ]
+Decreasing the feasibility of priviledge escalation would be a substantial
+step toward security as a whole.
+
+
+Bugs in operating system kernels has led to the development of a diverse set of
+technologies to attempt to reduce the risk.  [ OS virtualization, system
+call filtering, library OS, etc. ]  Unfortunately, these technologies also 
+have vulnerabilities that are also exploitable.
+
+One contributing factor to the security problems with these new designs is
+that it is not clear what portions of privileged code are
+likely to be safe to expose and which would present risk.
+Should one minimize the number of lines of code? [cites]  Is the number of API 
+calls a good metric for security? [cite Bascule]  [Anything else people have
+mentioned?]  
+
+In this paper, we provide a quantitative measure that shows
+areas of privileged code are likely to have flaws.  \cappos{There was a
+paper that did this using number of developers editing a module.  There
+are likely others in this area that need to be part of related work.}
+The measure examines lines of privileged code that are touched by popular 
+programs.  The intuition behind this metric is that kernel code that is rarely
+exercised is less likely to be well tested and is thus more likely to contain
+bugs.  We examine historical privilege escalation bugs from Linux over
+the past XX years and find that...
+
+By optimizing this metric [need a name] we devise the \emph{safely-reimplement}
+architecture, which minimizes the amount of risky privileged code that is
+executed.  
+Risky functionality is itself implemeneted in a sandbox with
+a small trusted-computing base.  This additional level of sandboxing 
+provides an outlet for risky functionality, without which legacy programs
+will not run, while containing security flaws in this code.  
+\cappos{ I need to figure out how / whether to tie this in: 
+We also analyze which functionality must be retained in privileged code.}
+
+[Contributions:]
+
+Quantitative metric for security in this context
+
+Novel architecture that comes from examining this metric.  Examination of
+what functionality must exist where.
+
+Implementation / Eval of sandbox using this philosophy.  Only X\% of zero
+days are exploitable w/ this vs YY\% or ZZ\%.
+
+
+
