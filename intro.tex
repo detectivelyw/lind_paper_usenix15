@@ -1,0 +1,64 @@
+\section{Introduction}
+\label{sec.introduction}
+
+Despite substantial effort, modern systems are vulnerable to privilege 
+escalation attacks.  \cappos{Mention zero-days, impact, etc.}
+Decreasing the feasibility of priviledge escalation would be a substantial
+step toward security as a whole.
+\yanyan{are we only targeting at privilege escalation and why?}
+\cappos{What sorts of bugs do we protect from?  We certainly don't protect 
+against bugs in apps.  We really want to stop any sort of bug that lets a 
+malicious program exploit flaws in the underlying kernel.  Perhaps privilege 
+escalation is a simplified subset, but it does capture what we are doing.}
+
+Bugs in operating system kernels has led to the development of a diverse set of
+technologies to attempt to reduce the risk.  \cappos{OS virtualization, system
+call filtering, library OS, etc. }  Unfortunately, these technologies also 
+have vulnerabilities that are also exploitable.
+\yanyan{add more details to explain why.}
+
+One contributing factor to the security problems with these new designs is
+that it is still unknown what portions of privileged code are
+safe to expose, and which portions would present risk. There lacks a standard 
+to quantify such safety (or risky) levels. For example, should one minimize 
+\textit{the number of lines of code}? \cappos{cites}  Is \textit{the number of API 
+calls} a good metric for security? \cappos{cite Bascule}   
+\cappos{Anything else people have mentioned?}
+
+In this paper, we provide a quantitative measure that shows
+areas of privileged code are likely to have flaws.  \cappos{There was a
+paper that did this using number of developers editing a module.  There
+are likely others in this area that need to be part of related work.}
+The measure examines lines of privileged code that are executed by popular 
+programs. \yanyan{=========== attention.. please DONOT use 'touch'. It sounds 
+very informal. ===========} The intuition behind this metric is that kernel code that is rarely
+exercised is less likely to be well tested and is thus more likely to contain
+bugs.  We examine historical privilege escalation bugs from Linux over
+the past XX years and find that...
+
+By optimizing this metric  \cappos{need a name} we devise the \emph{safely-reimplement}
+architecture, which minimizes the amount of risky privileged code that is
+executed.  
+Risky functionality is itself implemeneted in a sandbox with
+a small trusted-computing base.  
+\yanyan{instead of 'risky functionatilty', should it be 'privileged operations' instead? If you 
+want to quantify and minimize the risk of privilege escalation attacks (and convince me 
+and others we indeed only handle privilege escalation attacks), then this makes sense.}
+This additional level of sandboxing 
+provides an outlet for risky functionality, without which legacy programs
+will not run, while containing security flaws in this code.  
+\cappos{ I need to figure out how / whether to tie this in: 
+We also analyze which functionality must be retained in privileged code.}
+
+The contributions of this paper are as follows:
+
+Quantitative metric for security in this context\yanyan{what context?}
+
+Novel architecture that comes from examining this metric.  Examination of
+what functionality must exist where.
+
+Implementation / Eval of sandbox using this philosophy. \yanyan{what philosophy?} 
+Only X\% of zero days are exploitable w/ this vs YY\% or ZZ\%.
+
+
+

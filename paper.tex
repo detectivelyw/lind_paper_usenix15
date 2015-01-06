@@ -29,6 +29,26 @@
 \usepackage{url}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{color}
+
+\newcommand{\urlwofont}[1]{\underline{\urlstyle{same}\url{#1}}}
+
+\newif\ifrev
+%%%%%%%%%%%%%%%%%%
+% COMMENT OUT NEXT LINE TO HIDE TODOs
+\revtrue
+%%%%%%%%%%%%%%%%%%
+\ifrev
+  \newcommand{\yanyan}[1]{{\color{blue} [Yanyan: #1]}}
+  \newcommand{\cappos}[1]{{\color{red} [Justin: #1]}}
+  \newcommand{\todo}[1]{{\color{red} [todo: #1]}}
+  \newcommand{\linda}[1]{{\color{magenta} [Linda: #1]}}
+\else
+  \newcommand{\yanyan}[1]{}
+  \newcommand{\cappos}[1]{}
+  \newcommand{\todo}[1]{}
+  \newcommand{\linda}[1]{}
+\fi
 
 
 \begin{document}
@@ -44,15 +64,15 @@
 
 
 %make title bold and 14 pt font (Latex default is non-bold, 16 pt)
-\title{\Large \bf Lind: A Portable Lightweight Single-Process Sandbox}
+\title{Quantifying and Minimizing the Risk of Privilege Escalation Attacks}
 
 %for single author (just remove % characters)
 \author{
 %{\rm Yiwen Li}\\
 % Your Institution
 %\and
-{\rm Yiwen Li ~~~~~~~~~ Justin Cappos}\\\\
-New York University \\
+{\rm Yiwen Li, Justin Cappos, others TBD}\\\\
+New York University, others TBD \\
 \{liyiwen, jcappos\}@nyu.edu
 % copy the following lines to add more authors
 % \and
@@ -75,7 +95,7 @@ New York University \\
 
 
 \input{abstract}
-\input{introduction}
+\input{intro}
 \input{background}
 \input{architecture}
 \input{evaluation}
