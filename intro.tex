@@ -1,15 +1,12 @@
 \section{Introduction}
 \label{sec.introduction}
 
-Despite substantial effort, modern systems are vulnerable to privilege 
-escalation attacks.  \cappos{Mention zero-days, impact, etc.}
-Decreasing the feasibility of priviledge escalation would be a substantial
-step toward security as a whole.
-\yanyan{are we only targeting at privilege escalation and why?}
-\cappos{What sorts of bugs do we protect from?  We certainly don't protect 
-against bugs in apps.  We really want to stop any sort of bug that lets a 
-malicious program exploit flaws in the underlying kernel.  Perhaps privilege 
-escalation is a simplified subset, but it does capture what we are doing.}
+Despite substantial effort, privileged code in modern systems is vulnerable 
+to many types of attacks.  \cappos{Emphasize failures in the TCB allowing more 
+impactful crashes (complete system failures), privilege escalation, etc.
+Mention zero-days, impact, etc.}
+Decreasing the feasibility of these attacks, especially privilege escalation, 
+would be a substantial step toward security as a whole.
 
 Bugs in operating system kernels has led to the development of a diverse set of
 technologies to attempt to reduce the risk.  \cappos{OS virtualization, system
