@@ -42,13 +42,13 @@ The measure examines lines of privileged code that are executed by popular
 programs. \yanyan{=========== attention.. please DONOT use 'touch'. It sounds 
 very informal. ===========} The intuition behind this metric is that kernel code 
 that is rarely exercised \linda{does one exercise code?} is less likely to be \sout{well} 
-rigorously tested} and is thus more likely to contain bugs.  We examine historical privilege 
+rigorously tested and is thus more likely to contain bugs.  We examine historical privilege 
 escalation bugs from Linux over the past XX years and find that...
 
 By optimizing this metric  \cappos{need a name} we devise the \emph{safely-reimplement}
 architecture, which minimizes the amount of risky privileged code that is
 executed.  
-Risky functionality is itself implemeneted in a sandbox with
+Risky functionality is itself implemented in a sandbox with
 a small trusted-computing base.  
 \yanyan{instead of 'risky functionatilty', should it be 'privileged operations' instead? If you 
 want to quantify and minimize the risk of privilege escalation attacks (and convince me 
