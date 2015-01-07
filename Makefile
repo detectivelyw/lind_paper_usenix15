@@ -10,7 +10,7 @@ PSTOPDF ?= pstopdf
 
 .SUFFIXES:	.plot .eps .pdf
 
-all: $(TARGET).pdf 
+pdf: $(TARGET).pdf 
 
 $(TARGET).pdf: ${PDF_FIGURES} $(TARGET).bbl $(wildcard *.tex) $(STYFILES) 
 	pdflatex $(TARGET).tex
