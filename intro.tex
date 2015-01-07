@@ -2,36 +2,48 @@
 \label{sec.introduction}
 
 Despite substantial effort, privileged code in modern systems is vulnerable 
-to many types of attacks.  \cappos{Emphasize failures in the TCB allowing more 
+to many types of attacks. \linda{I don't think the first sentence says all that 
+much, or else, what it says is rather vague. Here are some suggestions: 
+Privileged code is an essential component of modern computer systems but 
+presents a number of security challenges. The privileged code itself is vulnerable 
+to attacks and other parts of a system could be damaged when vulnerabilities in 
+that privileged code are exploited. Our work focuses how to better protect 
+privileged code, which in turn will help protect other parts of the system.}
+
+ \cappos{Emphasize failures in the TCB allowing more 
 impactful crashes (complete system failures), privilege escalation, etc.
 Mention zero-days, impact, etc.}
 Decreasing the feasibility of these attacks, especially privilege escalation, 
-would be a substantial step toward security as a whole.
+would be a substantial step toward security as a whole. \linda{"security as a whole" 
+seems rather broad to me}
 
-Bugs in operating system kernels has led to the development of a diverse set of
-technologies to attempt to reduce the risk.  \cappos{OS virtualization, system
+Bugs in operating system kernels have motivated development of a diverse set of
+technologies to attempt to reduce these risks.  \cappos{OS virtualization, system
 call filtering, library OS, etc. }  Unfortunately, these technologies also 
-have vulnerabilities that are also exploitable.
+harbor vulnerabilities that are also exploitable.
 \yanyan{add more details to explain why.}
 
-One contributing factor to the security problems with these new designs is
+One contributing factor to security problems associated with these new designs is
 that it is still unknown what portions of privileged code are
-safe to expose, and which portions would present risk. There lacks a standard 
-to quantify such safety (or risky) levels. For example, should one minimize 
+safe to expose, and which portions would \sout{present risk} \linda{be be vulnerable}. 
+Missing is a standard for quantifying such safety (or risky) levels. For example, 
+\sout{should one}\linda{is it good practice to} minimize 
 \textit{the number of lines of code}? \cappos{cites}  Is \textit{the number of API 
 calls} a good metric for security? \cappos{cite Bascule}   
 \cappos{Anything else people have mentioned?}
 
 In this paper, we provide a quantitative measure that shows
-areas of privileged code are likely to have flaws.  \cappos{There was a
+areas of privileged code are likely to have flaws.  \linda{it isn't clear to me here what you 
+mean by "areas of privileged code"  -- I think the wording just needs to be more precise, but
+I'm not sure how, exactly}  \cappos{There was a
 paper that did this using number of developers editing a module.  There
 are likely others in this area that need to be part of related work.}
 The measure examines lines of privileged code that are executed by popular 
 programs. \yanyan{=========== attention.. please DONOT use 'touch'. It sounds 
-very informal. ===========} The intuition behind this metric is that kernel code that is rarely
-exercised is less likely to be well tested and is thus more likely to contain
-bugs.  We examine historical privilege escalation bugs from Linux over
-the past XX years and find that...
+very informal. ===========} The intuition behind this metric is that kernel code 
+that is rarely exercised \linda{does one exercise code?} is less likely to be \sout{well} 
+rigorously tested} and is thus more likely to contain bugs.  We examine historical privilege 
+escalation bugs from Linux over the past XX years and find that...
 
 By optimizing this metric  \cappos{need a name} we devise the \emph{safely-reimplement}
 architecture, which minimizes the amount of risky privileged code that is
@@ -41,9 +53,9 @@ a small trusted-computing base.
 \yanyan{instead of 'risky functionatilty', should it be 'privileged operations' instead? If you 
 want to quantify and minimize the risk of privilege escalation attacks (and convince me 
 and others we indeed only handle privilege escalation attacks), then this makes sense.}
-This additional level of sandboxing 
-provides an outlet for risky functionality, without which legacy programs
-will not run, while containing security flaws in this code.  
+This additional level of sandboxing provides an outlet for risky functionality, without which
+legacy programs will not run, while containing security flaws in this code. \linda{I think the logic
+of this sentence is off} 
 \cappos{ I need to figure out how / whether to tie this in: 
 We also analyze which functionality must be retained in privileged code.}
 
