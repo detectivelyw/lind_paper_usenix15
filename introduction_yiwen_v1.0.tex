@@ -1,0 +1,60 @@
+\section{Introduction}
+\label{sec.introduction}
+
+Privileged code is an essential component of modern computer systems but 
+presents a number of security challenges. The privileged code itself is vulnerable 
+to attacks and other parts of a system could be damaged when vulnerabilities in 
+that privileged code are exploited.
+
+Failures in the TCB allow more impactful crashes (complete system failures), privilege escalation, etc.
+(Mention zero-days, impact, etc.)
+Decreasing the feasibility of exploitation of the kernel bugs, especially privilege escalation, 
+would be a substantial step toward stronger security for computer systems.
+
+Bugs in operating system kernels have motivated development of a diverse set of
+technologies to attempt to reduce these risks, such as OS virtualization, system
+call filtering, library OSes, etc. Unfortunately, these technologies also 
+harbor vulnerabilities that are also exploitable. Even with these technologies in place,
+applications from the user space could still have access to a portion of the kernel that might contain 
+bugs and is risky to be exposed. 
+
+One contributing factor to security problems associated with these existing technologies and potential
+new designs is that it is still unknown which portions of the privileged code are
+safe to expose, and which portions would be be vulnerable. 
+One key missing puzzle is a standard for quantifying the safety (or risky) levels of the privileged code. 
+For example, is it good practice to minimize \textit{the number of lines of code}? cite[?] 
+Is \textit{the number of API calls} a good metric for security? cite[Bascule]   
+To our best knowledge, there is no quantitative metric to evaluate the privileged code and provide 
+insights into how to design a secure system that only interact with the privileged code in a safe way.
+
+In this paper, we provide a quantitative measure that shows
+certain areas of privileged code are likely to have flaws.  
+The measure examines lines of privileged code that are executed by popular 
+programs. The intuition behind this metric is that kernel code 
+that is rarely executed is less likely to be rigorously tested and is thus more likely to contain bugs. 
+We examine 40 historical  kernel bugs from Linux over the past 5 years and find out that 
+``commonly'' executed code metric has a strong correlation with being bug-free. 
+
+By optimizing our metric, we devise the \emph{safely-reimplement}
+architecture, which minimizes the amount of risky privileged code that is
+executed.  
+Risky functionality is itself implemented in a sandbox with
+a small trusted-computing base (TCB). 
+This additional level of sandboxing provides an outlet for risky functionality, without which
+legacy programs will not run, while containing security flaws in this code. 
+
+The contributions of this paper are as follows:
+\begin{itemize}
+\item We proposed a novel metric for evaluation security level of the privileged code. 
+Our metric consists of ``commonly'' executed code in the kernel at the level of ``lines of code''. 
+
+\item We quantitatively measured the privileged code using our metric, and labeled certain portions of 
+the kernel as ``safe" and certain portions of the kernel as ``risky''.
+
+\item We designed a novel secure architecture that comes from examining and leveraging our metric. 
+Using this new architecture, we implemented a sandbox we called Lind, which provides more secure environment
+for running legacy applications. 
+
+\item Evaluation shows that implementation of our sandbox Lind only has the potential to trigger 2.5\% of zero-day 
+vulnerabilities we examined, while systems built without using our security metric have more chances to trigger 
+vulnerabilities. (illustrate with data from running Graphene and Virtualbox)
