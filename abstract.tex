@@ -1,8 +1,25 @@
 \begin{abstract}
 
+An Operating System (OS) kernel is a trusted part of modern computer systems, 
+yet despite substantial effort, kernels still contain bugs and are vulnerable to many types of 
+attacks. Many previous approaches, including OS virtualization, system call filtering, and library 
+OSes, have been deployed to provide better security. 
+However, bugs continue to exist and remain exploitable even with these approaches in place. 
 
-\par
-Operating System (OS) kernels are vulnerable and exploitable. Without proper protection, numerous bugs and malicious code in applications can easily exploit vulnerabilities in the underlying OS kernel and endanger the entire system. Unfortunately, previous efforts still allow untrusted code to have access to substantial kernel footprint, which will lead to the exploitation of kernel bugs. In our work, we proposed a new ``safely re-implement'' strategy. Using this new isolation model, we designed and implemented our system Lind, which securely reconstructed complex yet essential OS functionality inside a dual-layer sandbox. The sandbox itself has minimized trusted computing base. Running legacy applications in Lind has reasonable overhead, and will only touch a small portion of commonly used kernel path that is not likely to trigger hidden bugs. Lind provides better isolation and stronger protection to the underlying kernel, thus making it a highly desirable tool for securely running legacy applications.  
-
+In this paper, we quantitatively measure and evaluate different lines of code in the kernel 
+based upon how often these lines are executed within popular applications. 
+Analyzing a history of Linux kernel flaws, we propose our “commonly” executed code metric 
+and show that it has a strong correlation with being bug-free. 
+Our metric provides insights into how to design a security system to provide stronger security 
+to computer systems. 
+For example, we used our metric to come up with a design that minimizes the trust placed 
+in risky privileged code. This is done by containing, within a sandbox, risky code that is needed 
+to support legacy programs. The sandbox is built so that it has a small TCB that minimizes 
+the use of risky code in the kernel. Using this technique, we implemented a sandbox we call Lind. 
+By running popular Linux packages and legacy programs inside Lind, we evaluated the 
+kernel traces that were generated and compared them against kernel traces produced 
+when running programs in environments other than Lind, such as Graphene and VirtualBox. 
+Our evaluation demonstrates that designs, such as our Lind prototype, provide security benefits 
+by minimizing the use of code that is not commonly executed.
 
 \end{abstract}
