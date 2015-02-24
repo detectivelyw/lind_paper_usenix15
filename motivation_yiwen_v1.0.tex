@@ -1,0 +1,71 @@
+\section{Motivation}
+\label{sec.motivation}
+
+The Operating System (OS) kernel is a critical component of the entire computing system, 
+yet is not protected properly and very vulnerable under the current security model of existing 
+computing systems.
+
+The kernel has to provide an interface to serve the requests from user applications for acquiring 
+essential system resources, such as memory, I/O, CPU, and etc. 
+All applications running in the system depend on the kernel to provide essential functionality. 
+
+However, the OS kernel is the privileged code that needs to be well protected. Access to the
+kernel code should be avoided as much as possible and be conducted in a very careful manner 
+if any contact is necessary. Failing to do this would lead to potential exploitation of kernel bugs and 
+may lead to serious damage to the entire computing system.  
+
+The OS kernel has always been an appealing target. During the past few years, 
+the exploitation of OS kernels has become a very serious problem that remains to be solved, 
+in spite of large amount of efforts devoted by researchers and practitioners. 
+There were 125 reported vulnerabilities of the Linux kernel, and 215 reported vulnerabilities 
+of all kinds of kernels in 2014 \cite{NVD:14}. Admittedly, the exploitation of user-level software 
+has become much harder, as recent versions of popular OSes come with numerous protections 
+and exploit mitigations. The principle of least privilege is better enforced in user accounts 
+and system services, compilers offer more protections against common software flaws, 
+and highly targeted applications, such as browsers and document viewers, have started to 
+employ sandboxing technique. On the other hand, the kernel has a huge codebase and 
+an attack surface that keeps increasing due to the constant addition of 
+new features \cite{Metrics:13}. Indicatively, the size of the Linux kernel in terms of lines of code 
+has more than doubled, from 6.6 MLOC in v2.6.11 to 16.9 MLOC in v3.10 \cite{Linux:13}.
+
+Opportunities for kernel exploitation are abundant. As an example consider the Linux kernel, 
+which has been plagued by common software flaws, such as stack and heap buffer overflows 
+\cite{CVE:20093234, CVE:20131828, CVE:20132892}, NULL pointer and pointer arithmetic errors 
+\cite{CVE:20050736, CVE:20092698}, memory disclosure vulnerabilities 
+\cite{CVE:20093002, CVE:20104073}, use-after-free and format string bugs 
+\cite{CVE:20132852, CVE:20134343}, signedness errors \cite{CVE:20103437, CVE:20132094}, 
+integer overflows \cite{CVE:20050736, CVE:20102959}, race conditions 
+\cite{CVE:20091527, CVE:20093547}, as well as missing authorization checks and 
+poor argument sanitization vulnerabilities 
+\cite{CVE:20103904, CVE:20104347, CVE:20120946, CVE:20130268}. 
+The exploitation of these bugs is particularly effective, 
+despite the existence of kernel protection mechanisms, 
+due to the weak separation between user and kernel space.
+
+To build a secure computing system, it is critical to provide sufficient protection for the kernel and 
+prevent kernel exploitation from happening. Many previous attempts, including OS virtualization, 
+system call filtering, library OSes and etc. have tried to address this problem. However, 
+kernel exploitation still exist, and the problem has not been solved effectively, which leads to a 
+fundamental question, why is it not working and what are we missing? After thinking about this
+question and examining previous work, we find that one key missing puzzle is that people do not know 
+clearly which part of the kernel are safe and can be exposed without potential dangers. Many previous
+work, such as building a sandbox and using library OSes focused on isolating user programs. While isolation 
+can be useful and help mitigate the problem, the proposed systems still get access to the kernel. 
+And the key is: the way they access the kernel has no difference than before, because they do not 
+know what's the best way to leverage the kernel securely. So, essentially, what they are doing is just moving 
+the attack surface from the previous place (between the user space and the kernel) to another place 
+(between the new proposed system and the kernel). The attack surface doesn't necessarily shrink. 
+Therefore, the proposed solutions were not effective. 
+
+It would be more effective, if we can actually shrink the attack surface and have better control over 
+the interface exposed by the kernel. In another word, we need to be crystal clear about which portion of 
+the kernel is safe and which portion of the kernel is risky. To obtain this piece of critical information, we
+propose a novel security metric to quantitatively measure and evaluate the kernel. Our metric will provide
+insights into the kernel and let us understand security features of the kernel in a better way. 
+
+With the help from our metric, we would be able to process the power of controlling the interface 
+exposed to the user space in a precise and secure way. We can then design and build secure systems 
+that provide stronger protection to the kernel. Ideally, we would like to only expose safe portion 
+of the kernel to the user space. Realistically, in some cases, even if we have to expose certain risky portion 
+of the kernel, we know clearly about the potential dangers and therefore can come up with better 
+strategies to mitigate the potential damage. 
